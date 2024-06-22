@@ -1,0 +1,12 @@
+Admin Login Details
+
+Username: Bamis
+Password: Password@123
+
+Users :
+
+Khaled
+password : 1234
+
+
+
