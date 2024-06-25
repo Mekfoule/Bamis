@@ -20,120 +20,89 @@ if (!isset($_SESSION["sess_user"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <title>Admin Panel</title>
-
-    <style>
-        h1 {
-            text-align: center;
-            font-size: 2.5em;
-            font-weight: bold;
-            padding-top: 1em;
-        }
-
-        .mycontainer {
-            width: 90%;
-            margin: 1.5rem auto;
-            min-height: 60vh;
-        }
-
-        .mycontainer table {
-            margin: 1.5rem auto;
-        }
-    </style>
-
+    <title>Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <?php include "tailwindConfig.php"; ?>
 </head>
 
-<body>
-    <nav class="navbar header-nav navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="admin.php">Bamis Bank</a>
-
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="list_emp.php" style="color:white;">View Employes <span class="badge badge-pill" style="background-color:#2196f3;"><?php include('count_emp.php'); ?></span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="add_emp.php" style="color:white;">Ajouter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="leave_history.php" style="color:white;">Historique</a>
-                </li>
-                <li class="nav-item">
-                    <button id="logout" onclick="window.location.href='logout.php';" class="btn btn-danger">Deconnexion</button>
-                </li>
-            </ul>
+<body class="flex flex-col h-screen">
+    <div>
+        <?php
+        include "navbar.php";
+        ?>
+    </div>
+    <div class="flex flex-row flex-1">
+        <div class="hidden md:block">
+            <?php
+            include "sidebar.php";
+            ?>
         </div>
-    </nav>
+        <div class="flex-1 p-5 overflow-x-auto overflow-y-auto">
 
-    <h1>Admin Panel - Registered Employees</h1>
+            <h1 class="text-green-600 text-3xl font-bold text-center my-3">Admin Panel - Registered Employees</h1>
 
-    <div class="mycontainer">
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped">
-                <thead>
-                    <th>#</th>
-                    <th>Nom d'utilisateur/Prenom</th>
-                    <th>Nom</th>
-                    <th>Matricule</th>
-                    <th>Domaine</th>
-                    <th>Niveau</th>
-                    <th>Grad</th>
-                    <th>Fonction</th>
-                    <th>Diplome</th>
-                    <th>Age</th>
-                    <th>Date de Naissance</th>
-                    <th>Date d'Entrée</th>
-                    <th>Date de Retraite</th>
-                    <th>Agence</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    <?php
-                    $req = "SELECT id, name, fullname, matricule, domaine, niveau, grad, fonction, diplome, age, datenaissance, dateentree, dateretraite, agence FROM users WHERE type = 'Employee'";
-                    $employees = mysqli_query($conn, $req);
-                    if ($employees) {
-                        $cnt = 1;
-                        while ($row = mysqli_fetch_assoc($employees)) {
-                            echo "<tr>
-                                    <td>$cnt</td>
-                                    <td>{$row['name']} / {$row['fullname']}</td>
-                                    <td>{$row['fullname']}</td>
-                                    <td>{$row['matricule']}</td>
-                                    <td>{$row['domaine']}</td>
-                                    <td>{$row['niveau']}</td>
-                                    <td>{$row['grad']}</td>
-                                    <td>{$row['fonction']}</td>
-                                    <td>{$row['diplome']}</td>
-                                    <td>{$row['age']}</td>
-                                    <td>{$row['datenaissance']}</td>
-                                    <td>{$row['dateentree']}</td>
-                                    <td>{$row['dateretraite']}</td>
-                                    <td>{$row['agence']}</td>
-                                    <td>
-                                        <a href=\"update_emp.php?id={$row['id']}\"><button class='btn btn-primary btn-sm'>Update</button></a>
-                                        <a href=\"delete_emp.php?id={$row['id']}\"><button class='btn btn-danger btn-sm'>Delete</button></a>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-[90%] mx-auto pt-4 mx-0">
+
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <th class="px-6 py-3">#</th>
+                        <th class="px-6 py-3">Nom d'utilisateur/Prenom</th>
+                        <th class="px-6 py-3">Nom</th>
+                        <th class="px-6 py-3">Matricule</th>
+                        <th class="px-6 py-3">Domaine</th>
+                        <th class="px-6 py-3">Niveau</th>
+                        <th class="px-6 py-3">Grad</th>
+                        <th class="px-6 py-3">Fonction</th>
+                        <th class="px-6 py-3">Diplome</th>
+                        <th class="px-6 py-3">Age</th>
+                        <th class="px-6 py-3">Date de Naissance</th>
+                        <th class="px-6 py-3">Date d'Entrée</th>
+                        <th class="px-6 py-3">Date de Retraite</th>
+                        <th class="px-6 py-3">Agence</th>
+                        <th class="px-6 py-3">Modifier</th>
+                        <th class="px-6 py-3">Supprimer</th>
+
+                    </thead>
+                    <tbody>
+                        <?php
+                        $req = "SELECT id, name, fullname, matricule, domaine, niveau, grad, fonction, diplome, age, datenaissance, dateentree, dateretraite, agence FROM users WHERE type = 'Employee'";
+                        $employees = mysqli_query($conn, $req);
+                        if ($employees) {
+                            $cnt = 1;
+                            while ($row = mysqli_fetch_assoc($employees)) {
+                                echo "<tr class=\"odd:bg-white even:bg-gray-50\">
+                                    <td class=\"px-6 py-4\">$cnt</td>
+                                    <td class=\"px-6 py-4\">{$row['name']} / {$row['fullname']}</td >
+                                    <td class=\"px-6 py-4\">{$row['fullname']}</td >
+                                    <td class=\"px-6 py-4\">{$row['matricule']}</td >
+                                    <td class=\"px-6 py-4\">{$row['domaine']}</td >
+                                    <td class=\"px-6 py-4\">{$row['niveau']}</td >
+                                    <td class=\"px-6 py-4\">{$row['grad']}</td >
+                                    <td class=\"px-6 py-4\">{$row['fonction']}</td >
+                                    <td class=\"px-6 py-4\">{$row['diplome']}</td >
+                                    <td class=\"px-6 py-4\">{$row['age']}</td >
+                                    <td class=\"px-6 py-4\">{$row['datenaissance']}</td >
+                                    <td class=\"px-6 py-4\">{$row['dateentree']}</td >
+                                    <td class=\"px-6 py-4\">{$row['dateretraite']}</td >
+                                    <td class=\"px-6 py-4\">{$row['agence']}</td >
+                                     <td class=\"px-6 py-4\">
+                                        <a href=\"update_emp.php?id={$row['id']}\"><button class=\"px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800\">Update</button></a>
+                                     <td class=\"px-6 py-4\">
+                                        <a href=\"delete_emp.php?id={$row['id']}\"><button  class=\"px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800\">delete</button></a>
                                     </td>
                                 </tr>";
-                            $cnt++;
+                                $cnt++;
+                            }
+                        } else {
+                            echo "<tr class='text-center'><td colspan='14'>No employees found.</td></tr>";
                         }
-                    } else {
-                        echo "<tr class='text-center'><td colspan='14'>No employees found.</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
-    <footer class="footer navbar navbar-expand-lg navbar-light bg-light" style="color:white;">
-        <div>
-            <p class="text-center">&copy; <?php echo date("Y"); ?> - HR Management - Bamis Bank</p>
-            <p class="text-center">PFE 2024</p>
-        </div>
-    </footer>
 </body>
 
 </html>

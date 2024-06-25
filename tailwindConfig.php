@@ -3,7 +3,7 @@
         theme: {
             extend: {
                 colors: {
-                    primary: '#22cb5c',
+                    primary: '#047404',
                     secondary: '#cc392e',
                     neutral: '#888888',
                 }

@@ -21,19 +21,19 @@ if (!isset($_SESSION["sess_user"])) {
         <?php include "tailwindConfig.php"; ?>
     </head>
 
-    <body>
+    <body class="flex flex-col h-screen">
         <div>
             <?php
             include "navbar.php";
             ?>
         </div>
-        <div class="flex flex-row">
+        <div class="flex flex-row flex-1">
             <div class="hidden md:block">
                 <?php
                 include "sidebar.php";
                 ?>
             </div>
-            <div class="flex-1 p-5">
+            <div class="flex-1 p-5 overflow-x-auto overflow-y-auto">
 
                 <h1 class="text-green-600 text-3xl font-bold text-center my-3">Admin Panel</h1>
 
@@ -91,9 +91,6 @@ if (!isset($_SESSION["sess_user"])) {
             </div>
         </div>
 
-        <?php
-        include "footer.php";
-        ?>
     </body>
 
     </html>
