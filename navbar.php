@@ -19,6 +19,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="leave_history.php" style="color:white;">Historique</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="add_emp.php" style="color:white;">Ajouter</a>
+            </li>
             <li class="bg-secondary hover:opacity-80 py-2 px-3 rounded-md shadow text-white">
                 <button id="logout" onclick="window.location.href='logout.php';">Deconnexion</button>
             </li>

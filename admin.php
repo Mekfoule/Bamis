@@ -74,8 +74,8 @@ if (!isset($_SESSION["sess_user"])) {
                                                     <td class=\"px-6 py-4\">{$datetime1->format('Y/m/d')} <b>--</b> {$datetime2->format('Y/m/d')}</td>
                                                     <td class=\"px-6 py-4\">{$interval->format('%a Day/s')}</td>
                                           
-                                                    <td class=\"px-6 py-4\"><a href=\"updateStatusAccept.php?eid={$row['eid']}&descr={$row['descr']}\"><button class='btn-success btn-sm' >Accept</button></a>
-                                                    <a href=\"updateStatusReject.php?eid={$row['eid']}&descr={$row['descr']}\"><button class='btn-danger btn-sm' >Reject</button></a></td>
+                                                    <td class=\"px-6 py-4\"> <a href=\"updateStatusAccept.php?eid={$row['eid']}&descr={$row['descr']}\"><button class=\"px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800\" >Accept</button></a>
+                                                    <a href=\"updateStatusReject.php?eid={$row['eid']}&descr={$row['descr']}\"><button class=\"px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800\" >Reject</button></a></td>
                                                   </tr>";
                                         $cnt++;
                                     }
